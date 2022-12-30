@@ -8,6 +8,14 @@ __pycache__
 .idea/
 .idea/
 
+node_modules/
+node_modules
+node_modules*
+
+
+package-lock.json
+
+
 .idea
 .idea/
 .idea/*

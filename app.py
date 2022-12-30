@@ -1,9 +1,11 @@
 
 from fastapi import FastAPI, Request,Response,UploadFile, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from lib.ipfs import upload_to_ipfs
+from fastapi.staticfiles import StaticFiles
 from models.settings import Settings
-import methods 
+from router import router
+
+
 
 
 app_settings = Settings()
@@ -11,6 +13,14 @@ app_settings = Settings()
 
 
 app = FastAPI( debug= app_settings.debug, title=  app_settings.app_name, description= "The quintessential link shortener", version= "0.1.0" )
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
+app.include_router(
+    router = router,
+    # prefix = "/v1"
+)
 
 
 
