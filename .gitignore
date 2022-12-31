@@ -14,8 +14,13 @@ node_modules*
 
 
 package-lock.json
+package.json
+tailwind.config.json
+/static/css/input.css
 
 
 .idea
 .idea/
 .idea/*
+
+

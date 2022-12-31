@@ -1,185 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', path = '/css/output.css') }}"  />
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"/>
-    <title> BitLink </title>
-</head>
-<body class="min-h-screen bg-white md:p-3">
-    <main class="min-h-screen bg-gradient-to-br md:rounded-xl from-sky-300 via-white to-white pt-[100px]">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path = '/css/output.css') }}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;700&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    />
+    <title>BitLink</title>
+  </head>
+  <body class="min-h-screen bg-white md:p-3">
+    <main
+      class="min-h-screen bg-gradient-to-br md:rounded-xl from-sky-200 via-white to-white pt-[100px]"
+    >
+      <div class="max-w-2xl mx-auto">
+        <h1
+          class="text-sky-500 font-bold text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl text-center"
+        >
+          Create Short Links!
+        </h1>
 
+        <p
+          class="my-6 text-center text-black/60 p-4 px-8 text-sm xl:text-base 2xl:text-lg"
+        >
+          BitLink is a custom short link personalization tools that enables you
+          to target, enagage, and drive more customers. Get started for free.
+        </p>
+      </div>
 
-
-
-    <div class="max-w-2xl mx-auto">
-
-
-    <h1 class="text-sky-500 font-bold text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl text-center ">  Create Short Links! </h1>
-
-
-    <p class="my-6 text-center text-black/60 p-4 px-8 text-sm  xl:text-base 2xl:text-lg"> 
-        BitLink  is  a custom short link personalization  tools that enables you to target, enagage, and drive more customers. Get started for  free. 
-    </p>
-
-
-
-    </div>
-
-
-
-
-
-    <div class="max-w-2xl w-[90%] md:w-full mx-auto bg-white rounded-xl shadow-2xl px-6 md:px-10 py-8 mt-12">
-
-
-
-
+      <div
+        class="max-w-2xl w-[90%] md:w-full mx-auto bg-white rounded-xl shadow-xl px-6 md:px-10 py-8 mt-12"
+      >
         <div class="relative">
-        <input class="rounded-xl bg-sky-100 h-[60px] md:h-[70px] placeholder:text-black/30 placeholder:text-base text-sky-500 block w-full pl-12 md:pl-16 pr-4 py-4 outline-none" type="text" placeholder="Paste a link to shorten it" name = "link"/> 
+          <input
+            class="rounded-xl bg-sky-100 h-[60px] md:h-[70px] placeholder:text-black/30 placeholder:text-base text-sky-500 block w-full pl-12 md:pl-16 pr-4 py-4 outline-none"
+            type="text"
+            placeholder="Paste a link to shorten it"
+            name="link"
+          />
 
+          <i
+            class="bi-link-45deg text-xl md:text-2xl absolute top-[30%] left-[4%] text-black/30"
+          ></i>
 
-        <i class="bi-link-45deg text-xl md:text-2xl absolute top-[30%] left-[4%] text-black/30 "></i>
-
-
-        <button role = "button" class="hidden shadow-xl shadow-sky-300 md:inline-block absolute top-[15%] right-[2%] rounded-xl min-w-[100px] bg-gradient-to-r from-sky-400 to-sky-500 text-white hover:opacity-80 transition-opacity duration-300 px-4 py-3">
+          <button
+            role="button"
+            class="hidden shadow-xl shadow-sky-300 md:inline-block absolute top-[15%] right-[2%] rounded-xl min-w-[100px] bg-gradient-to-r from-sky-400 to-sky-500 text-white hover:opacity-80 transition-opacity duration-300 px-4 py-3"
+          >
             Shorten
+          </button>
+        </div>
+
+        <button
+          role="button"
+          class="md:hidden mx-auto text-center block mt-8 w-[60%] rounded-xl min-w-[100px] bg-gradient-to-r from-sky-400 to-sky-500 text-white hover:opacity-80 transition-opacity duration-300 px-4 py-3"
+        >
+          Shorten
         </button>
-</div>  
 
+        <p class="text-center text-sm text-black/50 mt-8" role="button">
+          More Options &nbsp; <i class="bi-chevron-down text-sm"></i>
+        </p>
+      </div>
 
- <button role = "button" class="md:hidden  mx-auto text-center block mt-8 w-[60%] rounded-xl min-w-[100px] bg-gradient-to-r from-sky-400 to-sky-500 text-white hover:opacity-80 transition-opacity duration-300 px-4 py-3">
-            Shorten
-        </button>
+      <h3 class="text-center text-sm text-black/50 mt-8">
+        Use it, it's Free. Fast - Secure - Long Term Link
+      </h3>
 
+      <div class="max-w-3xl mx-auto md:mt-32 mt-16 w-[90%] md:w-full">
+        <h2
+          class="text-sky-500 font-bold text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl text-center"
+        >
+          A short link, infinite possibilities
+        </h2>
 
+        <p
+          class="my-6 text-center text-black/60 p-4 px-8 text-sm xl:text-base 2xl:text-lg"
+        >
+          With the advanced intelligent link shortening service, you can
+          customize your links and share them easily.
+        </p>
+      </div>
 
+      <!-- Row Boxes  -->
 
+      <div
+        class="flex flex-col space-y-12 md:space-y-0 justify-center mt-16 md:mt-32 items-center md:flex-row md:justify-around md:items-center w-[90%] mx-auto"
+      >
+        <div>
+          <i
+            class="bi-link-45deg text-6xl text-center mb-4 mx-auto block text-sky-500"
+          ></i>
 
-<p class="text-center text-sm text-black/50 mt-8 " role = "button"> More Options &nbsp; <i class="bi-chevron-down text-sm "></i> </p>
+          <h4 class="text-sky-500 font-bold text-xl xl:text-2xl text-center">
+            Custom ShortLinks
+          </h4>
 
-
-
-
-
-
-    </div>
-
-
-<h3 class="text-center text-sm text-black/50 mt-8 " > Use it, it's Free. Fast - Secure - Long Term Link </h3>
-
-
-
-
-
-    <div class="max-w-3xl mx-auto md:mt-32 mt-16 w-[90%] md:w-full ">
-
-
-    <h2 class="text-sky-500 font-bold text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl text-center ">  A short link, infinite possibilities </h2>
-
-
-    <p class="my-6 text-center text-black/60 p-4 px-8 text-sm  xl:text-base 2xl:text-lg"> 
-        With the advanced intelligent link shortening service, you can customize your links and share them easily.
-    </p>
-
-
-
-    </div>
-
-
-
-
-    <!-- Row Boxes  -->
-
-
-    <div class="flex flex-col  space-y-12 md:space-y-0 justify-center mt-16 md:mt-32 items-center md:flex-row md:justify-around md:items-center  w-[90%] mx-auto">
-
-
+          <p
+            class="my-2 text-center text-black/60 p-4 px-8 text-sm xl:text-sm 2xl:sm"
+          >
+            Track audience individually for each brand, website or client by
+            using your own custom shortlink.
+          </p>
+        </div>
 
         <div>
+          <i
+            class="bi-graph-up-arrow text-6xl text-center mb-4 mx-auto block text-sky-500"
+          ></i>
 
-            <i class="bi-link-45deg text-6xl text-center mb-4 mx-auto block text-sky-500"></i>
+          <h4 class="text-sky-500 font-bold text-xl xl:text-2xl text-center">
+            Track Clicks
+          </h4>
 
-
-    <h4 class="text-sky-500 font-bold text-xl xl:text-2xl text-center ">  Custom ShortLinks </h4>
-
-
-    <p class="my-2 text-center text-black/60 p-4 px-8 text-sm  xl:text-sm 2xl:sm"> 
-        Track audience individually for each brand, website  or client  by using  your own custom shortlink.
-    </p>
-
+          <p
+            class="my-2 text-center text-black/60 p-4 px-8 text-sm xl:text-sm 2xl:sm"
+          >
+            Focus your clients' effort on the most promising campaigns by taking
+            action based on comprehensive statistics
+          </p>
         </div>
 
+        <div>
+          <i
+            class="bi-chat-left-dots text-6xl text-center mb-4 mx-auto block text-sky-500"
+          ></i>
 
+          <h4 class="text-sky-500 font-bold text-xl xl:text-2xl text-center">
+            Friendly Support
+          </h4>
 
+          <p
+            class="my-2 text-center text-black/60 p-4 px-8 text-sm xl:text-sm 2xl:sm"
+          >
+            We really care about your success in using short links, so you
+            always get answers.
+          </p>
+        </div>
+      </div>
 
-          <div>
+      <div class="bg-sky-500 mt-48">
+        <div
+          class="bg-sky-500 relative bottom-[50px] min-h-[60px] md:min-h-[100px] transform skew-y-3"
+        ></div>
 
-            <i class="bi-graph-up-arrow text-6xl text-center mb-4 mx-auto block text-sky-500"></i>
+        <p
+          class="text-white font-bold text-xl md:text-2xl max-w-[25rem] ml-4 md:ml-16 text-left p-3"
+        >
+          Build Custom Audiences from
+          <span class="text-yellow-400">every URL</span>
+        </p>
 
+        <p
+          class="my-2 text-center md:text-left text-white ml-4 md:ml-16 py-6 max-w-[25rem] text-sm xl:text-base 2xl:xl"
+        >
+          Use BitLink to create super-targeted ads campaigns on your favourite
+          platforms like Facebook, Twitter, LinkedIn and Instgram to boost your
+          conversion.
+        </p>
 
+        <div
+          class="py-16 flex flex-col justify-center space-y-16 md:space-y-0 items-center md:flex-row md:justify-around md:items-center"
+        >
+          <div class="text-center p-2 text-white">
+            <h3 class="text-center text-base xl:text-2xl text-white">
+              Shortened links
+            </h3>
+            <p class="font-bold text-2xl xl:text-4xl pt-4">733,502</p>
+          </div>
 
-    <h4 class="text-sky-500 font-bold text-xl xl:text-2xl text-center ">  Track Clicks </h4>
+          <div class="text-center p-2 text-white">
+            <h3 class="text-center text-base xl:text-2xl text-white">
+              Clicked links
+            </h3>
+            <p class="font-bold text-2xl xl:text-4xl pt-4">301,100</p>
+          </div>
 
-
-    <p class="my-2 text-center text-black/60 p-4 px-8 text-sm  xl:text-sm 2xl:sm">
-        Focus your clients' effort on the most promising campaigns by taking action based on comprehensive statistics  
-    </p>
-
+          <div class="text-center p-2 text-white">
+            <h3 class="text-center text-base xl:text-2xl text-white">
+              Total users
+            </h3>
+            <p class="font-bold text-2xl xl:text-4xl pt-4">45,103</p>
+          </div>
         </div>
 
+        <!-- Newsletter  -->
 
+        <div class="max-w-3xl mx-auto md:mt-32 mt-16 w-[90%] md:w-full pb-16">
+          <h2
+            class="text-white font-bold text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl text-center"
+          >
+            Subscribe to our newsletter
+          </h2>
 
+          <p
+            class="my-6 text-center text-white/80 p-4 px-8 text-sm xl:text-base 2xl:text-lg"
+          >
+            Subscribe to our newsletter and keep up to date with news and useful
+            information on shortening links.
+          </p>
 
-          <div>
+          <div class="relative">
+            <input
+              class="rounded-xl bg-sky-100 h-[60px] md:h-[70px] placeholder:text-black/30 placeholder:text-base text-sky-500 block w-full pl-12 md:pl-16 pr-4 py-4 outline-none"
+              type="email"
+              placeholder="Email address"
+              name="email"
+            />
 
+            <i
+              class="bi-envelope text-xl md:text-2xl absolute top-[30%] left-[4%] text-black/30"
+            ></i>
 
-            <i class="bi-chat-left-dots text-6xl text-center mb-4 mx-auto block text-sky-500"></i>
+            <button
+              role="button"
+              class="shadow absolute top-[10%] md:top-[15%] right-[2%] rounded-xl min-w-[100px] bg-yellow-500 text-white hover:opacity-80 transition-opacity duration-300 px-4 md:px-12 py-3"
+            >
+              Subscribe
+            </button>
+          </div>
 
-
-
-    <h4 class="text-sky-500 font-bold text-xl xl:text-2xl text-center ">  Friendly Support </h4>
-
-
-    <p class="my-2 text-center text-black/60 p-4 px-8 text-sm  xl:text-sm 2xl:sm"> 
-        We really care about your success in using short links, so you always get answers.
-    </p>
-
+          <p
+            class="mt-6 text-center text-white/80 p-4 px-8 text-sm xl:text-base 2xl:text-lg"
+          >
+            Please read all the terms and conditions and accept them on the
+            basis of privacy (Your email will not be used to send spam or
+            promotional messages)
+          </p>
         </div>
+        <hr class="border-[1px] border-white/60 pb-16 block" />
+      </div>
+    </main>
 
-
-
-
-
-
-
-
-
-
-
-    </div>
-
-
-
-    </main> 
-
-
-
-    <footer class=" bg-sky-500  mt-48 ">
-
-        <div class="bg-sky-500 relative bottom-[50px] min-h-[60px] md:min-h-[100px] transform skew-y-3">
-
-        </div>
-
-        <p class="text-white font-bold text-xl md:text-2xl max-w-[25rem] ml-4  md:ml-16 text-left p-3"> Build Custom Audiences from <span class="text-yellow-400">every URL</span>   </p>
-
-        <p class="text-white mt-8 text-center text-xs md:text-sm pb-2"> &copy; BitLink Labs. All rights reserved. </p>
-
+    <footer>
+      <p class="text-white mt-8 text-center text-xs md:text-sm pb-2">
+        &copy; BitLink Labs. All rights reserved.
+      </p>
     </footer>
-</body>
+  </body>
 </html>
