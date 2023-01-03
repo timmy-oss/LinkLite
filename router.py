@@ -35,7 +35,7 @@ RESERVED_WORDS = [ "main", "index", "ping", "input", "output", "css" ]
 
 def generate_target():
 
-   seed = "abcdefghijklmnopqrstuvwxyz0_"
+   seed = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"
    N = 3
    M = 0
    target = generate(seed, N)

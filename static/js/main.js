@@ -1,3 +1,27 @@
+function isValidUrl(url) {
+  const typeOfUrl = typeof url;
+
+  if (typeOfUrl !== "string") {
+    throw new TypeError(`
+      URL type is invalid. Expected a string, but got: ${typeOfUrl}
+    `);
+  }
+
+  const protocol = "(?:(?:https?)://)";
+  const ipv4 =
+    "(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))";
+  const hostname = "(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)";
+  const domain =
+    "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*";
+  const tld = "(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))";
+  const port = "(?::\\d{2,5})?";
+  const resourcePath = "(?:[/?#]\\S*)?";
+  const regex = `${protocol}(?:localhost|${ipv4}|${hostname}${domain}${tld}\\.?)${port}${resourcePath}`;
+  const isUrl = new RegExp(`^${regex}$`, "i");
+
+  return isUrl.test(url);
+}
+
 $(document).ready(() => {
   // Clipboard set up
 
@@ -16,6 +40,21 @@ $(document).ready(() => {
 
     // console.log(linkToShorten);
 
+    if (!linkToShorten) {
+      $(".pane-input-error").text("Fill in the link address.");
+      $(".pane-input-error").slideDown();
+
+      return;
+    }
+
+    if (!isValidUrl(linkToShorten)) {
+      // alert("Invalid url");
+      $(".pane-input-error").text("Uhm, that's not a valid link address.");
+      $(".pane-input-error").slideDown();
+
+      return;
+    }
+
     // validate link
 
     $.ajax({
@@ -25,6 +64,7 @@ $(document).ready(() => {
         fetching = true;
         $(".loader").css({ display: "inline-block" });
         $(".shorten-text").hide();
+        $(".pane-input-error").hide();
       },
 
       type: "POST",
@@ -40,7 +80,7 @@ $(document).ready(() => {
       }),
     })
       .done((json) => {
-        // alert(json);
+        $(".pane-input-error").hide();
 
         $(".shorten-output").text(json.outputTarget);
 
@@ -48,7 +88,15 @@ $(document).ready(() => {
         $(".pane-output").slideDown();
       })
       .fail((xhr, status, error) => {
-        alert(error);
+        // alert(xhr.status);
+
+        if (xhr.status === 422) {
+          $(".pane-input-error").text("Invalid URL detected");
+        } else {
+          $(".pane-input-error").text(error);
+        }
+        $(".pane-input-error").slideDown();
+        console.log(error);
       })
       .always((xhr, status) => {
         fetching = false;
@@ -59,6 +107,10 @@ $(document).ready(() => {
   };
 
   $(".shorten-btn").click(handleShortenClick);
+
+  $("#shorten-input").focus(() => {
+    $(".pane-input-error").hide();
+  });
 
   $(".restart").click((e) => {
     $("#shorten-input").val("");
