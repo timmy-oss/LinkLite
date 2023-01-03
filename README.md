@@ -5,4 +5,4 @@
 
 BitLink is a custom short link personalization tool that enables you to target, engage, and drive more customers. Get started for free.
 
-> Built with ❤️ using `FastAPI`, `Redis` and `TailwindCSS`. 
+> Built with ❤️ using `FastAPI`, `Jinja2`, `Redis` and `TailwindCSS`. 
