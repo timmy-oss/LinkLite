@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, Path
+from fastapi import APIRouter, Request, Path, BackgroundTasks
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
 from models.settings import Settings
@@ -54,24 +54,39 @@ def generate_target():
 
 
 
+def do_tracking(target,shortlink):
+   click = Click(
+            shortlink = shortlink['id']
+         )
+
+   redis_db.json().arrappend("linkclicks", "$", click.dict(by_alias = True) )
+   redis_db.json().set( "shortlinks", f"$[?@.outputTarget == '{target}' ].clicks", shortlink['clicks'] + 1 )
 
 
 
-@router.get("/ping", response_class= HTMLResponse)
-async def ping( request : Request):
-   return templates.TemplateResponse("ping.html", {"request" : request})
+def apply_updates(target, data):
+   redis_db.json().arrappend( "linktargets", "$",  target )
+   redis_db.json().arrappend("shortlinks", "$",  data )
+
+
+
+
+
+
+
+# ROUTE HANDLERS
 
 
 
 @router.get("/", response_class= HTMLResponse)
-async def ping( request : Request):
+async def index( request : Request):
    return templates.TemplateResponse("index.html", {"request" : request, "base_domain" : BASE_DOMAIN})
 
 
 
 
 @router.post("/ajax/shorten", response_model= ShortLink)
-async def shorten_link( body : ShortenLinkInput ):
+async def shorten_link( body : ShortenLinkInput, bg_tasks : BackgroundTasks ):
 
    target = generate_target()
 
@@ -86,8 +101,7 @@ async def shorten_link( body : ShortenLinkInput ):
 
    data = shortlink.dict(by_alias = True)
 
-   redis_db.json().arrappend( "linktargets", "$",  target )
-   redis_db.json().arrappend("shortlinks", "$",  data )
+   bg_tasks.add_task(apply_updates, target, data)
 
    return data
 
@@ -97,7 +111,7 @@ async def shorten_link( body : ShortenLinkInput ):
 
 
 @router.get("/{target}", response_class= HTMLResponse)
-async def resolve_link_target( target : str, request : Request ):
+async def resolve_link_target( target : str, request : Request , bg_tasks : BackgroundTasks ):
    
 
    matching = redis_db.json().get( "shortlinks", f"$[?@.outputTarget == '{target}' ]" )
@@ -114,12 +128,7 @@ async def resolve_link_target( target : str, request : Request ):
       # Do analytics  
 
       if( shortlink['enableTracking']):
-         click = Click(
-            shortlink = shortlink['id']
-         )
-
-         redis_db.json().arrappend("linkclicks", "$", click.dict(by_alias = True) )
-         redis_db.json().set( "shortlinks", f"$[?@.outputTarget == '{target}' ].clicks", shortlink['clicks'] + 1 )
+         bg_tasks.add_task(do_tracking, target, shortlink) 
 
       return RedirectResponse( shortlink["inputLink"] )
 
