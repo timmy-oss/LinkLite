@@ -81,7 +81,7 @@ def apply_updates(target, data):
 async def zote( req :  Request):
    f = await req.form()
    print("Zote POSted : ", f)
-   return { "ok" : True, "f"  : str(f) }
+   return { "ok" : True, "f"  : f }
 
 
 
