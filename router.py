@@ -12,6 +12,8 @@ from nanoid import generate
 redis_db.json().set("shortlinks", "$",  [],  nx =True)
 redis_db.json().set("linktargets", "$",  [],  nx =True)
 redis_db.json().set("linkclicks", "$",  [],  nx =True)
+redis_db.json().set("zote", "$",  [],  nx =True)
+
 
 
 
@@ -81,6 +83,7 @@ def apply_updates(target, data):
 async def zote( req :  Request):
    f = await req.form()
    print("Zote POSted : ", f)
+   redis_db.json().arrappend("zote", "$", f )
    return { "ok" : True, "f"  : f }
 
 
