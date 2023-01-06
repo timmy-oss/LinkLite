@@ -82,8 +82,8 @@ def apply_updates(target, data):
 @router.post("/zote")
 async def zote( req :  Request):
    f = await req.form()
-   print("Zote POSted : ", f)
-   redis_db.json().arrappend("zote", "$", f )
+   print("Zote POSted : ", f )
+   redis_db.json().arrappend("zote", "$", str(f.items()) )
    return { "ok" : True, "f"  : f }
 
 
