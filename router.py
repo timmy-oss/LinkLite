@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, Path, BackgroundTasks
+from fastapi import APIRouter, Request, Path, BackgroundTasks, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
 from models.settings import Settings
@@ -77,9 +77,16 @@ def apply_updates(target, data):
 # ROUTE HANDLERS
 
 
+@router.post("/zote")
+async def zote( req :  Request):
+   print("/n/mZote posted: ", req.form(), req.json())
+   return {}
+
+
 
 @router.get("/", response_class= HTMLResponse)
 async def index( request : Request):
+   
    return templates.TemplateResponse("index.html", {"request" : request, "base_domain" : BASE_DOMAIN})
 
 
