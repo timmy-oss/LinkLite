@@ -79,8 +79,9 @@ def apply_updates(target, data):
 
 @router.post("/zote")
 async def zote( req :  Request):
-   print("/n/mZote posted: ", await req.form(), await req.json())
-   return { "ok" : True}
+   f = await req.form()
+   print("Zote POSted : ", f)
+   return { "ok" : True, "f"  : str(f) }
 
 
 
