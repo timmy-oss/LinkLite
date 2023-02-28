@@ -254,20 +254,28 @@
             </div>
 
             <div
-              class="flex-row custom-link-value hidden items-center justify-center space-x-8 w-full"
+              class="flex-row custom-link-value hidden items-center justify-center space-x-4 w-full"
             >
-              <input
-                class="rounded-xl bg-sky-100 h-[50px] md:h-[70px] placeholder:text-black/30 placeholder:text-sm md:placeholder:text-base text-sm md:text-base text-sky-500 block w-[70%] lg:w-[50%] pl-8 md:pl-8 pr-4 py-2 outline-none"
-                type="text"
-                placeholder="Your custom link"
-                name="custom_link_value"
-              />
+              <div
+                class="rounded-xl w-full bg-sky-100 flex flex-row items-center justify-center -space-x-2"
+              >
+                <span class="pl-4 pr-2 text-sky-500"> {{base_domain}}/ </span>
+                <input
+                  class="rounded-xl bg-sky-100 h-[50px] md:h-[70px] placeholder:text-black/30 placeholder:text-sm md:placeholder:text-base text-sm md:text-base text-sky-500 block w-[90%] lg:w-[70%] pl-1 md:pl-4 pr-4 py-2 outline-none"
+                  type="text"
+                  placeholder="custom link"
+                  name="custom_link_value"
+                />
+              </div>
 
               <p
-                class="text-black/60 px-2 text-lg text-left"
-                style="font-size: 0.8rem; font-weight: 400"
+                class="text-center text-sm hover:text-black/80 text-black/50"
+                role="button"
               >
-                (optional)
+                <i
+                  title="What is this?"
+                  class="bi-question-circle text-base"
+                ></i>
               </p>
             </div>
           </div>
