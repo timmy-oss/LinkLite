@@ -46,8 +46,12 @@
       >
         <div class="lg:w-[15%] lg:ml-4 lg:flex-shrink-0 self-center">
           <div class="flex flex-row justify-start items-center space-x-2">
-            <div class="lg:hidden relative">
+            <div class="lg:hidden mobile-menu-on">
               <i class="text-4xl text-sky-500 bi-list"></i>
+            </div>
+
+            <div class="hidden lg:hidden mobile-menu-off">
+              <i class="text-4xl text-sky-500 bi-x"></i>
             </div>
 
             <div class="flex flex-row items-center justify-between">
@@ -107,6 +111,68 @@
       </header>
 
       <!-- Header ends  -->
+
+      <!--Mobile Nav Menu  -->
+
+      <div
+        class="lg:hidden mobile-nav bg-gradient-to-tr from-sky-200 via-sky-200 to-white w-full fixed top-20 left-0 right-0 z-10 hidden"
+      >
+        <ul class="flex flex-col pt-6 pb-6 px-6 space-y-4">
+          <a href="">
+            <li
+              class="text-black/60 self-end border-b-2 pb-2 border-transparent hover:text-sky-500 hover:border-sky-500 font-bold transition-colors duration-200 text-lg"
+            >
+              Features
+            </li>
+          </a>
+
+          <a href="">
+            <li
+              class="text-black/60 self-end border-b-2 pb-2 border-transparent hover:text-sky-500 hover:border-sky-500 font-bold transition-colors duration-200 text-lg"
+            >
+              Pricing
+            </li>
+          </a>
+
+          <a href="">
+            <li
+              class="text-black/60 self-end border-b-2 pb-2 border-transparent hover:text-sky-500 hover:border-sky-500 font-bold transition-colors duration-200 text-lg"
+            >
+              About
+            </li>
+          </a>
+
+          <a href="">
+            <li
+              class="text-black/60 self-end border-b-2 pb-2 border-transparent hover:text-sky-500 hover:border-sky-500 font-bold transition-colors duration-200 text-lg"
+            >
+              Sign Up
+            </li>
+          </a>
+        </ul>
+      </div>
+
+      <!-- Mobile Nav ends  -->
+
+      <!-- Hero  -->
+
+      <div class="max-w-2xl mx-auto">
+        <h1
+          class="text-sky-500 font-bold text-3xl lg:text-5xl xl:text-6xl 2xl:text-7xl text-center"
+        >
+          Create Short Links!
+        </h1>
+
+        <p
+          class="my-6 text-center text-black/60 p-4 px-8 text-sm xl:text-base 2xl:text-lg"
+        >
+          LinkLite is a custom short link personalization tools that enables you
+          to target, enagage, and drive more customers. Get started for free.
+        </p>
+      </div>
+
+      <div class="max-w-2xl w-[90%] md:w-full mx-auto bg-white rounded-xl
+      shadow-xl px
 
       <div class="max-w-2xl mx-auto">
         <h1

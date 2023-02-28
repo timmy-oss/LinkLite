@@ -39,6 +39,22 @@ $(document).ready(() => {
     $(".hide-options").hide();
   });
 
+  $(".mobile-menu-on").click((e) => {
+    // console.log("Hiding...");
+
+    $(".mobile-nav").slideDown();
+    $(".mobile-menu-on").hide();
+    $(".mobile-menu-off").show();
+  });
+
+  $(".mobile-menu-off").click((e) => {
+    // console.log("Hiding...");
+
+    $(".mobile-nav").slideUp();
+    $(".mobile-menu-off").hide();
+    $(".mobile-menu-on").show();
+  });
+
   $(".custom-link-option").change((e) => {
     // console.log("Hiding...");
 
