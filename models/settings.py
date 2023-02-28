@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     db_url : AnyUrl = "redis://127.0.0.1:10005"
     db_username : str = "default"
     db_password  : str = "root"
-    base_domain : str = "localhost:8000"
+    base_domain : str = "localhost:7000"
     
 
 

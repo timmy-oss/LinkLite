@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, Path, BackgroundTasks, Form
+from fastapi import APIRouter, Request, BackgroundTasks
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
 from models.settings import Settings
@@ -13,9 +13,6 @@ redis_db.json().set("shortlinks", "$",  [],  nx =True)
 redis_db.json().set("linktargets", "$",  [],  nx =True)
 redis_db.json().set("linkclicks", "$",  [],  nx =True)
 redis_db.json().set("zote", "$",  [],  nx =True)
-
-
-
 
 
 
@@ -38,7 +35,7 @@ RESERVED_WORDS = [ "main", "index", "ping", "input", "output", "css" ]
 def generate_target():
 
    seed = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"
-   N = 3
+   N = 4
    M = 0
    target = generate(seed, N)
    matching = redis_db.json().get( "linktargets", f"$[?@ == '{target}' ]" )
@@ -77,15 +74,6 @@ def apply_updates(target, data):
 
 
 # ROUTE HANDLERS
-
-
-@router.post("/zote")
-async def zote( req :  Request):
-   f = await req.form()
-   print("Zote POSted : ", f )
-   redis_db.json().arrappend("zote", "$", str(f.items()) )
-   return { "ok" : True, "f"  : f }
-
 
 
 @router.get("/", response_class= HTMLResponse)

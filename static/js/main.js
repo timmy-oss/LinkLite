@@ -23,6 +23,36 @@ function isValidUrl(url) {
 }
 
 $(document).ready(() => {
+  // SHow / Hide more options
+  $(".show-options").click((e) => {
+    // console.log("Showing...");
+    $(".more-options").slideDown();
+    $(".show-options").hide();
+    $(".hide-options").show();
+  });
+
+  $(".hide-options").click((e) => {
+    // console.log("Hiding...");
+
+    $(".more-options").slideUp();
+    $(".show-options").show();
+    $(".hide-options").hide();
+  });
+
+  $(".custom-link-option").change((e) => {
+    // console.log("Hiding...");
+
+    const v = $(".custom-link-option").val();
+
+    if (v === "1") {
+      $(".custom-link-value").css({ display: "flex" });
+
+      $(".custom-link-value").slideDown();
+    } else if (v === "0") {
+      $(".custom-link-value").slideUp();
+    }
+  });
+
   // Clipboard set up
 
   new ClipboardJS(".clipboard-copy");
