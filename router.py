@@ -1,10 +1,11 @@
-from fastapi import APIRouter, Request, BackgroundTasks
+from fastapi import APIRouter, Request, BackgroundTasks, HTTPException
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
 from models.settings import Settings
 from models.links import ShortenLinkInput, ShortLink, Click
 from db import redis_db
 from nanoid import generate
+from datetime import datetime
 
 
 # Redis Initialization 
@@ -87,7 +88,18 @@ async def index( request : Request):
 @router.post("/ajax/shorten", response_model= ShortLink)
 async def shorten_link( body : ShortenLinkInput, bg_tasks : BackgroundTasks ):
 
-   target = generate_target()
+   target = None
+
+   if body.is_custom:
+      target = body.custom_link
+   else: 
+      target = generate_target()
+
+   if body.is_custom:
+      matching = redis_db.json().get( "shortlinks", f"$[?@.outputTarget == '{target}' ]" )
+      if len(matching) > 0:
+         raise HTTPException(400, "Custom link exists already" )
+      
 
    shortlink =  ShortLink(
       input_link = body.input_link,
@@ -112,7 +124,6 @@ async def shorten_link( body : ShortenLinkInput, bg_tasks : BackgroundTasks ):
 @router.get("/{target}", response_class= HTMLResponse)
 async def resolve_link_target( target : str, request : Request , bg_tasks : BackgroundTasks ):
    
-
    matching = redis_db.json().get( "shortlinks", f"$[?@.outputTarget == '{target}' ]" )
 
    if len(matching) == 0:
@@ -123,6 +134,19 @@ async def resolve_link_target( target : str, request : Request , bg_tasks : Back
    else:
 
       shortlink = matching[0]
+
+      if not shortlink["isValid"]:
+
+         return templates.TemplateResponse("not_found.html", { "target" : target, "base_domain" : BASE_DOMAIN, "request"  : request } )
+      
+      created = shortlink["created"]
+      now = datetime.now().timestamp()
+
+      if ( now > ( shortlink["validity"] * 24 * 60 * 60 ) + created ) and shortlink["validity"] > 0 :
+
+         print("Expired")
+
+         return templates.TemplateResponse("not_found.html", { "target" : target, "base_domain" : BASE_DOMAIN, "request"  : request } )
 
       # Do analytics  
 

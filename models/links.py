@@ -11,10 +11,11 @@ def uid():
 class ShortenLinkInput(BaseModel):
     author : Union[None,str] = Field( default= None)
     enable_tracking : bool = Field(default= True, alias="enableTracking")
-    is_custom : bool = Field(default= False)
+    is_custom : bool = Field(default= False, alias = "isCustom")
     custom_target : Union[str,None] = Field( default=None, alias="customTarget")
     input_link : AnyUrl = Field(alias= "inputLink" )
-    validity : float = Field( default = 48)
+    validity : float = Field( ge = 0, le = 365,default = 0)
+    custom_link : Union[str,None] = Field( default  = None, alias = "customLink")
 
 
 
@@ -38,8 +39,9 @@ class ShortLink(BaseModel):
     created : float = Field( default_factory= time)
     last_updated : float = Field( default_factory= time, alias = "lastUpdated" )
     enable_tracking : bool = Field(default= True, alias="enableTracking")
-    validity : float = Field( default = 48)
+    validity : float = Field( default = 0)
     is_custom : bool = Field(default= False, alias = "isCustom")
+    is_valid : bool = Field( default = True, alias = "isValid")
 
     class Config:
         allow_population_by_field_name = True

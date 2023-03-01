@@ -23,6 +23,10 @@ function isValidUrl(url) {
 }
 
 $(document).ready(() => {
+  $(".custom-link-input").focus(() => {
+    $(".custom-link-input-error").slideUp();
+  });
+
   // SHow / Hide more options
   $(".show-options").click((e) => {
     // console.log("Showing...");
@@ -93,10 +97,31 @@ $(document).ready(() => {
       return;
     }
 
+    let validity = $(".validity-input").val();
+    let useCustomLink =
+      $(".use-custom-link-input").val() === "1" ? true : false;
+    let customLink = $(".custom-link-input").val().trim();
+
     if (!isValidUrl(linkToShorten)) {
       // alert("Invalid url");
       $(".pane-input-error").text("Uhm, that's not a valid link address.");
       $(".pane-input-error").slideDown();
+
+      return;
+    }
+
+    // console.log(validity, useCustomLink, customLink);
+
+    if (useCustomLink && (customLink.length < 3 || customLink > 24)) {
+      // alert("Invalid url");
+      $(".custom-link-input-error").text(
+        "Custom link must be between 3 and 24 alphanumeric characters."
+      );
+      $(".custom-link-input-error").slideDown();
+
+      $(".more-options").slideDown();
+      $(".show-options").hide();
+      $(".hide-options").show();
 
       return;
     }
@@ -112,7 +137,6 @@ $(document).ready(() => {
         $(".shorten-text").hide();
         $(".pane-input-error").hide();
       },
-
       type: "POST",
       dataType: "json",
       contentType: "application/json",
@@ -120,9 +144,10 @@ $(document).ready(() => {
       data: JSON.stringify({
         inputLink: linkToShorten,
         enableTracking: true,
-        validity: 48,
-        isCustom: false,
+        isCustom: useCustomLink,
         author: null,
+        validity: +validity.trim(),
+        customLink: useCustomLink ? customLink : null,
       }),
     })
       .done((json) => {
@@ -136,10 +161,23 @@ $(document).ready(() => {
       .fail((xhr, status, error) => {
         // alert(xhr.status);
 
+        if (useCustomLink) {
+          // alert("Invalid url");
+          $(".custom-link-input-error").text(
+            `${xhr.responseJSON.detail || status}`
+          );
+          $(".custom-link-input-error").slideDown();
+
+          $(".more-options").slideDown();
+          $(".show-options").hide();
+          $(".hide-options").show();
+        }
+
         if (xhr.status === 422) {
           $(".pane-input-error").text("Invalid URL detected");
         } else {
-          $(".pane-input-error").text(error);
+          // console.log(xhr);
+          $(".pane-input-error").text(`${xhr.responseJSON.detail || status}`);
         }
         $(".pane-input-error").slideDown();
         console.log(error);
