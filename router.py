@@ -84,6 +84,20 @@ async def index( request : Request):
 
 
 
+@router.get("/ajax/tracking/{target}", response_model= ShortLink )
+async def get_link_insights( target  :str  ):
+
+   matching = redis_db.json().get( "shortlinks", f"$[?@.outputTarget == '{target}' ]" )
+
+   if len(matching) == 0:
+      raise HTTPException(400, "This link does not exist or has been deleted." )
+
+   shortlink = matching[0]
+
+   return shortlink
+   
+
+
 
 @router.post("/ajax/shorten", response_model= ShortLink)
 async def shorten_link( body : ShortenLinkInput, bg_tasks : BackgroundTasks ):
@@ -154,5 +168,4 @@ async def resolve_link_target( target : str, request : Request , bg_tasks : Back
          bg_tasks.add_task(do_tracking, target, shortlink) 
 
       return RedirectResponse( shortlink["inputLink"] )
-
 

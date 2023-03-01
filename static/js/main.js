@@ -23,8 +23,29 @@ function isValidUrl(url) {
 }
 
 $(document).ready(() => {
+  // SHow / Hide tracking box
+  $(".open-tracking-box").click((e) => {
+    // console.log("Showing...");
+    $(".tracking-box-overlay").show();
+    $(".tracking-box-content").fadeIn();
+  });
+
+  $(".close-tracking-box").click((e) => {
+    // console.log("Hiding...");
+    $(".tracking-box-content").hide();
+    $(".tracking-box-overlay").hide();
+
+    $(".tracking-output-pane").hide();
+    $(".tracking-input-pane").show();
+    $("#tracking-link-input").val("");
+  });
+
   $(".custom-link-input").focus(() => {
-    $(".custom-link-input-error").slideUp();
+    $(".custom-link-input-error").hide();
+  });
+
+  $("#tracking-link-input").focus(() => {
+    $(".tracking-input-error").hide();
   });
 
   // SHow / Hide more options
@@ -80,6 +101,114 @@ $(document).ready(() => {
   // Shorten Button Handler
 
   let fetching = false;
+
+  // Handle Tracking Request
+  const handleGetLinkInsightsClick = (e) => {
+    e.preventDefault();
+
+    if (fetching) return;
+
+    const linkToTrack = $("#tracking-link-input").val().trim();
+
+    if (!linkToTrack) {
+      $(".tracking-input-error").text("Fill in the link.");
+      $(".tracking-input-error").slideDown();
+
+      return;
+    }
+
+    if (linkToTrack.length < 3 || linkToTrack > 24) {
+      $(".tracking-input-error").text(
+        "Link must be between 3 and 24 alphanumeric characters."
+      );
+      $(".tracking-input-error").slideDown();
+
+      return;
+    }
+
+    // validate link
+
+    $.ajax({
+      url: `/ajax/tracking/${linkToTrack}`,
+
+      beforeSend: (xhr) => {
+        fetching = true;
+        $(".tracking-box-content .loader").css({ display: "inline-block" });
+        $(".tracking-box-content  .shorten-text").hide();
+        $(".tracking-box-content  .tracking-input-error").hide();
+      },
+      type: "GET",
+      dataType: "json",
+      contentType: "application/json",
+      processData: false,
+    })
+      .done((json) => {
+        $(".tracking-input-error").hide();
+
+        $(".tracking-input-pane").hide();
+        $(".tracking-output-pane").slideDown();
+
+        // Populate
+        $(".tracking-output-pane .shortlink").text(json.outputTarget);
+
+        $(".tracking-output-pane .published").text(
+          new Date(json.created * 1000).toDateString()
+        );
+        $(".tracking-output-pane .target-address").text(json.inputLink);
+
+        $(".tracking-output-pane .clicks").text(json.clicks);
+
+        if (json.isCustom) {
+          $(".tracking-output-pane .is-custom-link .bi-check2-circle").show();
+          $(".tracking-output-pane .is-custom-link .bi-x-circle").hide();
+        } else {
+          $(".tracking-output-pane .is-custom-link .bi-x-circle").show();
+          $(".tracking-output-pane .is-custom-link .bi-check2-circle").hide();
+        }
+
+        if (json.isValid) {
+          $(".tracking-output-pane .validity .bi-check2-circle").show();
+          $(".tracking-output-pane .validity .bi-x-circle").hide();
+        } else {
+          $(".tracking-output-pane .validity .bi-x-circle").show();
+          $(".tracking-output-pane .validity .bi-check2-circle").hide();
+        }
+
+        if (json.enableTracking) {
+          $(".tracking-output-pane .tracking-enabled .bi-check2-circle").show();
+          $(".tracking-output-pane .tracking-enabled .bi-x-circle").hide();
+        } else {
+          $(".tracking-output-pane .tracking-enabled .bi-x-circle").show();
+          $(".tracking-output-pane .tracking-enabled .bi-check2-circle").hide();
+        }
+      })
+      .fail((xhr, status, error) => {
+        // alert(xhr.status);
+
+        if (xhr.status === 422) {
+          $(".tracking-box-content .tracking-input-error").text(
+            "Invalid input, try again!"
+          );
+        } else {
+          // console.log(xhr);
+          $(".tracking-input-error").text(
+            `${xhr.responseJSON.detail || status}`
+          );
+        }
+        $(".tracking-input-error").slideDown();
+        console.log(error);
+      })
+      .always((xhr, status) => {
+        fetching = false;
+
+        $(".tracking-box-content .loader").hide();
+        $(".tracking-box-content  .shorten-text").show();
+      });
+  };
+
+  $(".tracking-submit-btn").click(handleGetLinkInsightsClick);
+
+  // --------------------------------
 
   const handleShortenClick = (e) => {
     e.preventDefault();

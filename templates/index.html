@@ -41,20 +41,102 @@
     >
       <!-- Tracking Box  -->
 
-      <div>
-        <div
-          class="fixed z-[2] bg-black/40 top-0 left-0 right-0 bottom-0"
-        ></div>
+      <div
+        class="fixed hidden tracking-box-overlay z-[2] bg-black/40 top-0 left-0 right-0 bottom-0"
+      ></div>
+
+      <div
+        class="fixed hidden tracking-box-content top-32 lg:top-32 left-0 right-0 mx-auto w-[90%] max-w-xl p-4 px-6 lg:px-12 min-h-[200px] rounded bg-white z-[2]"
+      >
+        <i
+          class="bi-x close-tracking-box cursor-pointer absolute rounded-full bg-gray-200 hover:bg-gray-300 transition-colors px-2 py-1 top-4 right-4 text-xl lg:text-2xl text-black/70 hover:text-black"
+        ></i>
+
+        <h2 class="text-center text-lg lg:text-xl font-bold text-sky-500 mb-6">
+          Track Your Link
+        </h2>
 
         <div
-          class="fixed top-24 lg:top-32 left-0 right-0 mx-auto w-[90%] max-w-xl p-4 px-6 lg:px-12 min-h-[200px] rounded bg-white z-[2]"
+          class="tracking-output-pane hidden min-h-[200px] space-y-3 rounded-lg"
         >
-          <h2
-            class="text-center text-lg lg:text-xl font-bold text-sky-500 mb-6"
+          <p
+            class="bg-sky-200 text-left pl-4 pr-2 rounded-lg py-1 text-sm space-x-4 text-black/70 capitalize flex flex-row justify-between items-center"
           >
-            Track Your Link
-          </h2>
+            Short link
+            <span
+              class="font-bold text-black lowercase bg-white px-3 text-ellipsis overflow-x-hidden py-1 rounded-lg"
+            >
+              {{base_domain}}/<span class="shortlink"></span>
+            </span>
+          </p>
+          <p
+            class="bg-sky-200 text-left pl-4 pr-2 rounded-lg py-1 text-sm space-x-4 text-black/70 capitalize flex flex-row justify-between items-center"
+          >
+            Created
+            <span
+              class="font-bold published capitalize text-black bg-white px-3 text-ellipsis overflow-x-hidden py-1 rounded-lg"
+            >
+              23th January, 2022
+            </span>
+          </p>
 
+          <p
+            class="bg-sky-200 text-left pl-4 pr-2 rounded-lg py-1 text-sm space-x-4 text-black/70 capitalize flex flex-row justify-between items-center"
+          >
+            Target address
+            <span
+              class="font-bold target-address text-black lowercase bg-white px-3 text-ellipsis overflow-x-hidden py-1 rounded-lg"
+            >
+              https://campuses.com/CampusTour2024
+            </span>
+          </p>
+
+          <p
+            class="bg-sky-200 text-left pl-4 pr-2 rounded-lg py-1 text-sm space-x-4 text-black/70 capitalize flex flex-row justify-between items-center"
+          >
+            Custom Link
+            <span
+              class="font-bold is-custom-link text-black bg-white px-3 text-ellipsis overflow-x-hidden py-1 rounded-lg"
+            >
+              <i class="bi-check2-circle text-xl text-green-500 hidden"></i>
+              <i class="bi-x-circle text-xl text-red-500"></i>
+            </span>
+          </p>
+          <p
+            class="bg-sky-200 text-left pl-4 pr-2 rounded-lg py-1 text-sm space-x-4 text-black/70 capitalize flex flex-row justify-between items-center"
+          >
+            Tracking Enabled
+            <span
+              class="font-bold tracking-enabled text-black bg-white px-3 text-ellipsis overflow-x-hidden py-1 rounded-lg"
+            >
+              <i class="bi-check2-circle text-xl text-green-500 hidden"></i>
+              <i class="bi-x-circle text-xl text-red-500"></i>
+            </span>
+          </p>
+          <p
+            class="bg-sky-200 text-left pl-4 pr-2 rounded-lg py-1 text-sm space-x-4 text-black/70 capitalize flex flex-row justify-between items-center"
+          >
+            Clicks
+            <span
+              class="font-bold clicks text-black lowercase bg-white px-3 text-ellipsis overflow-x-hidden py-1 rounded-lg"
+            >
+              23,234,012
+            </span>
+          </p>
+          <p
+            class="bg-sky-200 text-left pl-4 pr-2 rounded-lg py-1 text-sm space-x-4 text-black/70 capitalize flex flex-row justify-between items-center"
+          >
+            Validity
+            <span
+              class="font-bold text-black validity bg-white px-3 text-ellipsis overflow-x-hidden py-1 rounded-lg"
+            >
+              <i class="bi-check2-circle text-xl text-green-500 hidden"></i>
+              <i class="bi-x-circle text-xl text-red-500"></i>
+            </span>
+          </p>
+        </div>
+
+        <div class="tracking-input-pane">
           <div
             class="rounded-xl w-full bg-sky-100 flex flex-row items-center justify-center -space-x-2"
           >
@@ -66,15 +148,22 @@
 
             <span class="text-xs text-sky-500 px-2">/ </span>
             <input
-              class="rounded-xl custom-link-input bg-sky-100 h-[50px] md:h-[70px] placeholder:text-black/30 placeholder:text-sm md:placeholder:text-base text-sm md:text-base text-sky-500 block w-[98%] lg:w-[70%] pl-1 md:pl-4 pr-4 py-2 outline-none"
+              id="tracking-link-input"
+              class="rounded-xl bg-sky-100 h-[50px] md:h-[70px] placeholder:text-black/30 placeholder:text-sm md:placeholder:text-base text-sm md:text-base text-sky-500 block w-[98%] lg:w-[70%] pl-1 md:pl-4 pr-4 py-2 outline-none"
               type="text"
               placeholder="Enter your link"
               name="tracked_link"
             />
           </div>
+
+          <p
+            class="tracking-input-error mt-4 text-xs text-center hidden text-red-500"
+          >
+            Error
+          </p>
           <button
             role="button"
-            class="block mx-auto text-center mt-4 md:mt-8 w-[80%] rounded-xl bg-gradient-to-r from-sky-400 to-sky-500 text-white hover:opacity-80 transition-opacity duration-300 px-4 py-2"
+            class="block tracking-submit-btn mx-auto text-center mt-4 md:mt-6 lg:mb-4 w-[80%] rounded-xl bg-gradient-to-r from-sky-400 to-sky-500 text-white hover:opacity-80 transition-opacity duration-300 px-4 py-2"
           >
             <span class="shorten-text"> Track </span>
             <span
@@ -148,7 +237,7 @@
 
         <div class="max-w-[300px] lg:block">
           <button
-            class="block w-full hover:c-bg hover:opacity-80 transition-opacity duration-200 rounded-3xl bg-sky-500 text-white px-6 font-bold capitalize py-2 text-sm md:text-lg"
+            class="block open-tracking-box w-full hover:c-bg hover:opacity-80 transition-opacity duration-200 rounded-3xl bg-sky-500 text-white px-6 font-bold capitalize py-2 text-sm md:text-lg"
           >
             Track link
           </button>
@@ -245,7 +334,7 @@
           ></i>
 
           <i
-            class="bi-check2 hidden text-xl md:text-2xl absolute top-[12%] right-[4%] text-sky-500"
+            class="bi-check2-circle2 hidden text-xl md:text-2xl absolute top-[12%] right-[4%] text-sky-500"
           ></i>
 
           <p
