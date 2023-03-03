@@ -1,6 +1,6 @@
 # Blinkr
 
-<img src="https://user-images.githubusercontent.com/82800805/214995199-1bb856c0-3287-4de5-8016-75aca3126ebf.png" alt = "bitlink logo" height = "200px">
+![logo](https://user-images.githubusercontent.com/82800805/222675252-054f632d-586c-48b7-b676-01c514447fbe.png)
 
 [![Build and deploy Python app to Azure Web App - bitlink](https://github.com/timmy-oss/bitlink/actions/workflows/main_bitlink.yml/badge.svg)](https://github.com/timmy-oss/bitlink/actions/workflows/main_bitlink.yml)
 
