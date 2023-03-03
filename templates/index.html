@@ -7,7 +7,7 @@
 
     <meta
       name="description"
-      content="LinkLite is a custom short link personalization tool that enables you to target, engage, and drive more customers. Get started for free."
+      content="Blinkr is a custom short link personalization tool that enables you to target, engage, and drive more customers. Get started for free."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,7 +20,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
     />
 
-    <link rel="icon" href="/static/assets/LinkLite.png" />
+    <link rel="icon" href="/static/assets/logo.png" />
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -33,7 +33,7 @@
     <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
 
     <script src="/static/js/main.js"></script>
-    <title>LinkLite</title>
+    <title>Blinkr</title>
   </head>
   <body class="bg-white">
     <main
@@ -179,10 +179,12 @@
       <!-- Header  -->
 
       <header
-        class="fixed top-0 left-0 right-0 z-10 bg-gradient-to-br from-sky-200 via-sky-200 to-white py-2 md:py-4 pl-4 pr-2 lg:pr-4 flex flex-row space-x-6 lg:space-x-8 justify-evenly items-center"
+        class="fixed top-0 left-0 right-0 z-10 bg-gradient-to-br from-sky-200 via-sky-200 to-white py-2 md:py-4 pl-4 pr-2 lg:pr-4 flex flex-row space-x-6 lg:space-x-8 justify-between lg:justify-evenly items-center"
       >
         <div class="lg:w-[15%] lg:ml-4 lg:flex-shrink-0 self-center">
-          <div class="flex flex-row justify-start items-center space-x-2">
+          <div
+            class="flex flex-row first: justify-start items-center space-x-2"
+          >
             <div class="lg:hidden">
               <i class="text-4xl text-sky-500 bi-list mobile-menu-on"></i>
               <i class="text-4xl text-sky-500 bi-x mobile-menu-off hidden"></i>
@@ -191,17 +193,18 @@
             <div class="flex flex-row items-center justify-between">
               <image
                 alt="Logo"
-                src="{{url_for('static', path = '/assets/LinkLite.png')}}"
+                src="{{url_for('static', path = '/assets/logo.png')}}"
                 loading="eager"
                 priority
                 width="60"
                 height="60"
+                class="w-8 h-8 md:w-16 md:h-16"
                 self-start
               />
               <h1
                 class="font-bold text-left text-sky-500 text-lg md:text-xl xl:text-2xl px-3"
               >
-                LinkLite
+                Blinkr
               </h1>
             </div>
           </div>
@@ -292,7 +295,7 @@
         <p
           class="my-6 text-center text-black/60 p-4 px-8 text-sm xl:text-base 2xl:text-lg"
         >
-          LinkLite is a custom short link personalization tools that enables you
+          Blinkr is a custom short link personalization tools that enables you
           to target, enagage, and drive more customers. Get started for free.
         </p>
       </div>
@@ -565,7 +568,7 @@
         <p
           class="my-2 text-center md:text-left text-white ml-4 md:ml-16 px-4 md:px-2 py-6 max-w-[25rem] text-sm xl:text-base 2xl:xl"
         >
-          Use LinkLite to create super-targeted ads campaigns on your favourite
+          Use Blinkr to create super-targeted ads campaigns on your favourite
           platforms like Facebook, Twitter, LinkedIn and Instgram to boost your
           conversion.
         </p>
@@ -613,7 +616,7 @@
 
           <div class="relative">
             <input
-              class="rounded-xl bg-sky-100 h-[60px] md:h-[70px] placeholder:text-black/30 placeholder:text-base text-sky-500 block w-full pl-12 md:pl-16 pr-4 py-4 outline-none"
+              class="rounded-xl bg-sky-100 h-[60px] md:h-[70px] placeholder:text-black/30 placeholder:text-base text-sky-500 block w-full pl-12 md:pl-20 pr-4 py-4 outline-none"
               type="email"
               placeholder="Email address"
               name="email"
@@ -676,7 +679,17 @@
       <p
         class="text-black/60 text-center text-xs md:text-sm pt-4 md:pt-16 pb-2"
       >
-        &copy; LinkLite Labs. All rights reserved.
+        Developed with <i class="bi-heart-fill text-red-500"></i> by
+        <a
+          target="_blank"
+          href="https://github.com/timmy-oss/"
+          class="text-blue-500"
+          >Timileyin Pelumi</a
+        >
+      </p>
+
+      <p class="text-black/60 text-center text-xs md:text-sm pt-4 md:pt-6 pb-2">
+        &copy; Blinkr Labs. All rights reserved.
       </p>
     </footer>
   </body>

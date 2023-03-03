@@ -4,7 +4,7 @@ from pydantic import BaseSettings, AnyUrl
 class Settings(BaseSettings):
     " Model for the application settings  "
     debug : bool = True
-    app_name : str = "LinkLite"
+    app_name : str = "Blinkr"
     allowed_origins : list[str] = ["http://localhost:3000",]
     db_url : AnyUrl = "redis://127.0.0.1:10005"
     db_username : str = "default"
