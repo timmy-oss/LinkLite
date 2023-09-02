@@ -5,7 +5,7 @@ class Settings(BaseSettings):
     " Model for the application settings  "
     debug : bool = True
     app_name : str = "Blinkr"
-    allowed_origins : list[str] = ["http://localhost:3000",]
+    allowed_origins : list[str] = ["http://localhost:3000", "https://pp2.timmypelumy.dev", "https://blinkr.onrender.com" ]
     db_url : AnyUrl = "redis://127.0.0.1:10005"
     db_username : str = "default"
     db_password  : str = "root"
@@ -14,4 +14,4 @@ class Settings(BaseSettings):
 
 
     class Config:
-        env_file = ".secrets"
+        env_file = ".env"
